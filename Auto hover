@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel Image Display</title>
+<style>
+  .carousel {
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+
+  .carousel-inner {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 80px;
+    padding-top: 70px; /* Add upper padding */
+  }
+
+  .card-wrapper {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px; /* Adjust spacing between cards */
+    transition: transform 0.3s ease;
+  }
+
+  .card {
+    width: 250px; /* Adjusted size for cards */
+    height: 350px; /* Adjusted height for cards */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, z-index 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Ensure z-index works properly */
+    background-color: white; /* Add background color to hide cut-out */
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    transition: filter 0.3s ease;
+    filter: grayscale(100%); /* Apply grayscale effect to images */
+  }
+
+  .card-wrapper:hover .card {
+    transform: scale(1.1) translate(0.5%, 2%); /* Enlarge and overlap hovered card */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+    z-index: 1; /* Ensure hovered card is above others */
+  }
+
+  .card-wrapper:hover .card img {
+    filter: grayscale(0%); /* Remove grayscale effect on hover */
+  }
+
+  .card-wrapper:hover:not(:hover) .card {
+    transform: scale(0.9); /* Scale down nearby cards */
+  }
+</style>
+</head>
+<body>
+
+<div class="carousel">
+  <div class="carousel-inner">
+    <div class="card-wrapper">
+      <div class="card">
+        <img src="https://static.wixstatic.com/media/b335fc_d2967a5aae944a859631164222357926~mv2.png" alt="Image 1">
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card">
+        <img src="https://static.wixstatic.com/media/b335fc_9993b2c9999c4c09a87a952e6cdb16e6~mv2.png/v1/fill/w_1122,h_1332,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/b335fc_9993b2c9999c4c09a87a952e6cdb16e6~mv2.png" alt="Image 2">
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card">
+        <img src="https://static.wixstatic.com/media/b335fc_b16321d14f814e4880739fe3166ff5fe~mv2.png" alt="Image 3">
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card">
+        <img src="https://static.wixstatic.com/media/b335fc_3a7c0cef8189414f9c3dacd7720388ca~mv2.png" alt="Image 4">
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card">
+        <img src="https://static.wixstatic.com/media/b335fc_64fae56d64594e46ae3d52c244b1b0d2~mv2.png" alt="Image 5">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const cards = document.querySelectorAll('.card');
+
+  function randomHover() {
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    cards[randomIndex].classList.add('hovered');
+    setTimeout(() => {
+      cards[randomIndex].classList.remove('hovered');
+    }, 2000); // Change hover duration as needed (in milliseconds)
+  }
+
+  // Initial random hover
+  randomHover();
+
+  // Automatic random hover every 5 seconds
+  setInterval(randomHover, 5000); // Change interval duration as needed (in milliseconds)
+</script>
+
+</body>
+</html>
